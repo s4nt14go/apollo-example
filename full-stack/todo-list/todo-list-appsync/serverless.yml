@@ -1,0 +1,40 @@
+# NOTE: update this with your service name
+service: star-wars
+
+# Create an optimized package for our functions
+package:
+  individually: true
+  exclude:
+    - package-lock.json
+    - package.json
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
+  - serverless-dotenv-plugin # Load .env as environment variables
+  - serverless-appsync-plugin
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  environment:
+    STAGE: ${self:custom.stage}
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  appSync:
+    - ${file(serverless.appsync-api.yml)}
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+
+  echo:
+    handler: functions/echo.handler
