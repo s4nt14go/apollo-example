@@ -43,6 +43,10 @@ functions:
 
   todo:
     handler: functions/todo.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:GetItem
+        Resource: !GetAtt TodosTable.Arn
 
   todos:
     handler: functions/todos.handler
