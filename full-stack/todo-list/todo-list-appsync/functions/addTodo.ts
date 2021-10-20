@@ -19,9 +19,5 @@ export const handler: AppSyncResolverHandler<any, any> = async (event) => {
         Item,
     }).promise();
 
-    await new Promise(resolve =>
-        setTimeout(resolve, 5000)
-    );  // To highlight optimistic response in client
-
     return Item;
 }
