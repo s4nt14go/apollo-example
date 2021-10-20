@@ -13,6 +13,7 @@ plugins:
   - serverless-offline
   - serverless-dotenv-plugin # Load .env as environment variables
   - serverless-appsync-plugin
+  - serverless-iam-roles-per-function
 
 provider:
   name: aws
@@ -22,6 +23,7 @@ provider:
   environment:
     STAGE: ${self:custom.stage}
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+    TODOS_TABLE: !Ref TodosTable
 
 custom:
   stage: ${opt:stage, self:provider.stage}
@@ -47,3 +49,20 @@ functions:
 
   addTodo:
     handler: functions/addTodo.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:PutItem
+        Resource: !GetAtt TodosTable.Arn
+
+resources:
+  Resources:
+    TodosTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
