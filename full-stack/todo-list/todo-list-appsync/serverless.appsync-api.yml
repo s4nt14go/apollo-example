@@ -1,4 +1,4 @@
-name: star-wars-api
+name: apollo-example-api
 schema: schema.api.graphql
 authenticationType: API_KEY
 mappingTemplates:
