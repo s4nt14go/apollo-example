@@ -50,6 +50,10 @@ functions:
 
   todos:
     handler: functions/todos.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:Scan
+        Resource: !GetAtt TodosTable.Arn
 
   addTodo:
     handler: functions/addTodo.handler
