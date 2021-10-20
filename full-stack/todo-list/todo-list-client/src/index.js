@@ -6,16 +6,28 @@ import {
   ApolloProvider,
   useQuery,
   useMutation,
-  gql
+  gql,
+  ApolloLink,
 } from "@apollo/client";
+import { createAuthLink } from 'aws-appsync-auth-link';
+import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
+import config from './config';
 
-// If running locally with a local version of the to-do server,
-// change this URL to http://localhost:4000
-const serverURL = 'https://uofye.sse.codesandbox.io/';
+const _config = {
+    url: config.api.URL,
+    region: config.api.REGION,
+    auth: {
+        type: config.api.AUTH_TYPE,
+        apiKey: config.api.API_KEY,
+    },
+};
 
-const client = new ApolloClient({
-  uri: serverURL,
-  cache: new InMemoryCache()
+export const client = new ApolloClient({
+    link: ApolloLink.from([
+        createAuthLink(_config),
+        createSubscriptionHandshakeLink(_config),
+    ]),
+    cache: new InMemoryCache(),
 });
 
 const ADD_TODO = gql`
