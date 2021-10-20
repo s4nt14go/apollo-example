@@ -82,7 +82,7 @@ function AddTodo() {
               addTodo: {
                 id: 'temp-id',
                 __typename: "Todo",
-                description: input.value
+                description: input.value + ' [from optimisticResponse]',
               }
             }
           });
@@ -138,7 +138,16 @@ function Todos() {
         <form
           onSubmit={e => {
             e.preventDefault();
-            updateTodo({ variables: { id, description: input.value } });
+            updateTodo({
+                variables: { id, description: input.value },
+                optimisticResponse: {
+                    updateTodo: {
+                        id,
+                        __typename: "Todo",
+                        description: input.value + ' [from optimisticResponse]',
+                    }
+                }
+            });
             input.value = "";
           }}
         >
