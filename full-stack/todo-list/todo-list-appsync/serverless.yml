@@ -31,16 +31,6 @@ custom:
     - ${file(serverless.appsync-api.yml)}
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: hello
-          method: get
-
-  echo:
-    handler: functions/echo.handler
-
   todo:
     handler: functions/todo.handler
     iamRoleStatements:

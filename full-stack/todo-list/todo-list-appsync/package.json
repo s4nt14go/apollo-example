@@ -1,17 +1,9 @@
 {
   "name": "apollo-example",
   "version": "0.1.0",
-  "description": "A TypeScript starter for Serverless Framework",
-  "main": "handler.js",
-  "scripts": {
-    "test": "serverless-bundle test"
-  },
+  "description": "Apollo client using AppSync",
   "author": "",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/AnomalyInnovations/serverless-typescript-starter.git"
-  },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.64",
     "@types/jest": "^26.0.14",
