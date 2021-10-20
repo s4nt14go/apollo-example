@@ -41,3 +41,6 @@ functions:
 
   todo:
     handler: functions/todo.handler
+
+  todos:
+    handler: functions/todos.handler

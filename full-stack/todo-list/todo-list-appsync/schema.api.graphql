@@ -5,6 +5,7 @@ schema {
 type Query {
     echo(arg1: String!): String!
     todo(id: String!): Todo
+    todos: [Todo]
 }
 
 type Todo {

@@ -12,6 +12,11 @@ mappingTemplates:
     dataSource: todoFunction
     request: false
     response: false
+  - type: Query
+    field: todos
+    dataSource: todosFunction
+    request: false
+    response: false
 
 dataSources:
   - type: AWS_LAMBDA
@@ -22,3 +27,7 @@ dataSources:
     name: todoFunction
     config:
       functionName: todo
+  - type: AWS_LAMBDA
+    name: todosFunction
+    config:
+      functionName: todos
