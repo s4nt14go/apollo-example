@@ -1,3 +1,3 @@
-# Apollo docs examples
+# Todo list using AppSync
 
-This repo contains runnable sample code from various pages in the [Apollo docs](https://www.apollographql.com/docs/). Where applicable, these samples are also available in CodeSandbox.
+Apollo sample rewrite to work with AWS AppSync
