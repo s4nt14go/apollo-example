@@ -4,4 +4,10 @@ schema {
 
 type Query {
     echo(arg1: String!): String!
+    todo(id: String!): Todo
+}
+
+type Todo {
+    id: String!
+    description: String!
 }

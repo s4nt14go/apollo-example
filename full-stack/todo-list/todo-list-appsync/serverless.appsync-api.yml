@@ -7,9 +7,18 @@ mappingTemplates:
     dataSource: echoFunction
     request: false
     response: false
+  - type: Query
+    field: todo
+    dataSource: todoFunction
+    request: false
+    response: false
 
 dataSources:
   - type: AWS_LAMBDA
     name: echoFunction
     config:
       functionName: echo
+  - type: AWS_LAMBDA
+    name: todoFunction
+    config:
+      functionName: todo
