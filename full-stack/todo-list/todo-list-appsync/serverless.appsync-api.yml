@@ -23,6 +23,11 @@ mappingTemplates:
     dataSource: addTodoFunction
     request: false
     response: false
+  - type: Mutation
+    field: updateTodo
+    dataSource: updateTodoFunction
+    request: false
+    response: false
 
 dataSources:
   - type: AWS_LAMBDA
@@ -41,3 +46,7 @@ dataSources:
     name: addTodoFunction
     config:
       functionName: addTodo
+  - type: AWS_LAMBDA
+    name: updateTodoFunction
+    config:
+      functionName: updateTodo

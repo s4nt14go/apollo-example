@@ -62,6 +62,13 @@ functions:
         Action: dynamodb:PutItem
         Resource: !GetAtt TodosTable.Arn
 
+  updateTodo:
+    handler: functions/updateTodo.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:UpdateItem
+        Resource: !GetAtt TodosTable.Arn
+
 resources:
   Resources:
     TodosTable:

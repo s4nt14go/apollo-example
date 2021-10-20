@@ -12,3 +12,24 @@ export const scanTable = async (params) => {
     }while(typeof items.LastEvaluatedKey != 'undefined');
     return scanResults;
 };
+
+export function getUpdateExpresion(update: any) {
+    let prefix = "set ";
+    const updateExpresion: any = {
+        UpdateExpression: '',
+        ExpressionAttributeValues: {},
+        ExpressionAttributeNames: {}
+    };
+    const attributes = Object.keys(update)
+    for (let i=0; i<attributes.length; i++) {
+        const attribute = attributes[i]
+        // if (attribute !== "id") {
+        if (update[attribute] !== undefined) {
+            updateExpresion["UpdateExpression"] += prefix + "#" + attribute + " = :" + attribute
+            updateExpresion["ExpressionAttributeValues"][":" + attribute] = update[attribute]
+            updateExpresion["ExpressionAttributeNames"]["#" + attribute] = attribute
+            prefix = ", "
+        }
+    }
+    return updateExpresion;
+}
