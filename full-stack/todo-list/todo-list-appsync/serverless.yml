@@ -44,3 +44,6 @@ functions:
 
   todos:
     handler: functions/todos.handler
+
+  addTodo:
+    handler: functions/addTodo.handler

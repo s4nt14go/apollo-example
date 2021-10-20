@@ -18,6 +18,12 @@ mappingTemplates:
     request: false
     response: false
 
+  - type: Mutation
+    field: addTodo
+    dataSource: addTodoFunction
+    request: false
+    response: false
+
 dataSources:
   - type: AWS_LAMBDA
     name: echoFunction
@@ -31,3 +37,7 @@ dataSources:
     name: todosFunction
     config:
       functionName: todos
+  - type: AWS_LAMBDA
+    name: addTodoFunction
+    config:
+      functionName: addTodo

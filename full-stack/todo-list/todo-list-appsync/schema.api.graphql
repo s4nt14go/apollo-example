@@ -1,5 +1,6 @@
 schema {
     query: Query
+    mutation: Mutation
 }
 
 type Query {
@@ -11,4 +12,8 @@ type Query {
 type Todo {
     id: String!
     description: String!
+}
+
+type Mutation {
+    addTodo(description: String!): Todo
 }
