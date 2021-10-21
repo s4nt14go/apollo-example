@@ -8,6 +8,7 @@ import {
   useMutation,
   gql,
   ApolloLink,
+  useSubscription,
 } from "@apollo/client";
 import { createAuthLink } from 'aws-appsync-auth-link';
 import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
@@ -37,6 +38,15 @@ const ADD_TODO = gql`
       description
     }
   }
+`;
+
+const ADD_TODO_SUBSCRIPTION = gql`
+    subscription OnAddTodo {
+        onAddTodo {
+            id
+            description
+        }
+    }
 `;
 
 // Component for adding a to-do item
@@ -171,6 +181,16 @@ function Todos() {
   );  
 }
 
+function Subscription() {
+    const { data, error, loading } = useSubscription(
+        ADD_TODO_SUBSCRIPTION
+    );
+
+    if (error) return <p>Error: {error.message}</p>;
+    if (loading) return <p>Subscribed to new todos...</p>;
+    return <p>{JSON.stringify(data, null, 2)}</p>
+}
+
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -178,6 +198,7 @@ function App() {
         <h2>My to-do list</h2>
         <AddTodo />
         <Todos />
+        <Subscription />
       </div>
     </ApolloProvider>
   );
