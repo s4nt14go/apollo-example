@@ -24,6 +24,10 @@ mappingTemplates:
     request: false
     response: false
 
+  - type: Subscription
+    field: onAddTodo
+    dataSource: none
+
 dataSources:
   - type: AWS_LAMBDA
     name: todoFunction
@@ -41,3 +45,5 @@ dataSources:
     name: updateTodoFunction
     config:
       functionName: updateTodo
+  - type: NONE
+    name: none
