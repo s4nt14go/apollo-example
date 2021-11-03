@@ -36,7 +36,7 @@ type Subscription {
 }
 ```
 
-* @apollo/client: 3.4.5
+* Apollo Client v3
 
 ## Resources
 

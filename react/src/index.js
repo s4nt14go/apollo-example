@@ -183,7 +183,33 @@ function Todos() {
 
 function Subscription() {
     const { data, error, loading } = useSubscription(
-        ADD_TODO_SUBSCRIPTION
+        ADD_TODO_SUBSCRIPTION, {
+            onSubscriptionData({ client: { cache }, subscriptionData }) {
+
+                const {data: onAddTodo} = subscriptionData;
+
+                cache.modify({
+                    fields: {
+                        todos(existingTodos = []) {
+                            const newTodo = onAddTodo.onAddTodo;
+
+                            if (existingTodos.filter(e => e.__ref === 'Todo:' + newTodo.id).length) return existingTodos;
+
+                            const newTodoRef = cache.writeFragment({
+                                data: newTodo,
+                                fragment: gql`
+                                    fragment NewTodo on Todo {
+                                        id
+                                        description
+                                    }
+                                `
+                            });
+                            return existingTodos.concat(newTodoRef);
+                        }
+                    }
+                });
+            },
+        }
     );
 
     if (error) return <p>Error: {error.message}</p>;
